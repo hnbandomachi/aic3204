@@ -11,6 +11,7 @@
 #include "usbstk5515.h"
 #include "math.h"
 extern Int16 AIC3204_rset(Uint16 regnum, Uint16 regval);
+#define Rcv 0x08
 #define XmitL 0x10
 #define XmitR 0x20
 #define Fs 48000
@@ -24,58 +25,18 @@ extern Int16 AIC3204_rset(Uint16 regnum, Uint16 regval);
  *                                                                          *
  * ------------------------------------------------------------------------ */
 Int16 aic3204_tone_headphone()
-{
-  Int16 sinetable[48] = {
-      0x0000, 0x10b4, 0x2120, 0x30fb, 0x3fff, 0x4dea, 0x5a81, 0x658b,
-      0x6ed8, 0x763f, 0x7ba1, 0x7ee5, 0x7ffd, 0x7ee5, 0x7ba1, 0x76ef,
-      0x6ed8, 0x658b, 0x5a81, 0x4dea, 0x3fff, 0x30fb, 0x2120, 0x10b4,
-      0x0000, 0xef4c, 0xdee0, 0xcf06, 0xc002, 0xb216, 0xa57f, 0x9a75,
-      0x9128, 0x89c1, 0x845f, 0x811b, 0x8002, 0x811b, 0x845f, 0x89c1,
-      0x9128, 0x9a76, 0xa57f, 0xb216, 0xc002, 0xcf06, 0xdee0, 0xef4c};
-  double *signal;
-  short ptsig1[480];
-  short ptsig2[480];
+{  
   short ptsig3[480];
-  short carrier[480];
-  short message[8] = {1, 2, 3, 0, 3, 3, 2, 0};
+  Int16 message[8];
   short modulated[480];
 
-  int x, Vpp = 1;
+  int x, Vpp = 2;
   int nsample = 480;
+  Int16 data3;
   Int16 j, i = 0;
-  Int16 sample;
-  signal = (double *)malloc(nsample * sizeof(double));
+  Int16 recevoir[480];
 
-  for(x = 0; x < nsample; x++) {
-    modulated[x] = 1333*Vpp*sin(2*PI*x*Fc/Fs) * message[x/60];
-  }
-
-  for (x = 0; x < nsample; x++)
-  {
-    signal[x] = cos(2 * PI * x * Fa / Fs) * cos(2 * PI * x * Fc / Fs);
-    //printf("x is %lf \n" , signal[x]);
-  }
-  for (x = 0; x < nsample; x++)
-  {
-    ptsig1[x] = 1333 * signal[x];
-    //printf("m is %d \n" , ptsig1[x]);
-  }
-  for (x = 0; x < nsample; x++)
-  {
-    signal[x] = cos(2 * PI * x * Fa / Fs) * sin(2 * PI * x * Fc / Fs);
-    //printf("x is %lf \n" , signal[x]);
-  }
-  for (x = 0; x < nsample; x++)
-  {
-    ptsig2[x] = 1333 * signal[x];
-  }
-  free(signal);
-  for (x = 0; x < nsample; x++)
-  {
-    ptsig3[x] = modulated[x];
-  }
-
-  /* Pre-generated sine wave data, 16-bit signed samples */
+    /* Pre-generated sine wave data, 16-bit signed samples */
 
   /* Configure AIC3204 */
   AIC3204_rset(0, 0); // Select page 0
@@ -136,17 +97,63 @@ Int16 aic3204_tone_headphone()
   I2S0_CR = 0x8010; // 16-bit word, slave, enable I2C
   I2S0_ICMR = 0x3f; // Enable interrupts
 
+  // Lấy 480 mẫu giá trị của xung vuông
+  for (x = 0; x < 480; x++)
+  {
+    while((Rcv & I2S0_IR) == 0);  // Wait for interrupt pending flag
+    data3 = I2S0_W0_MSW_R; // 16 bit left channel received audio data
+    if (data3 > 0)
+    {
+      data3 = 1;
+    }
+    else if (data3 < 0)
+    {
+      data3 = 0;
+    }
+    recevoir[x] = data3;
+  }
+  // In ra 480 giá trị mẫu của xung vuông vừa nhận được ở trên
+  for (x = 0; x < 480; x++) {
+    printf("recevoir = %d\n", recevoir[x]);
+  }
+
+  // Đưa 480 giá trị mẫu vào message có kích thước là 8
+  i = 0;
+  for (x = 0; x < 480; x++)
+  {
+    if (abs(recevoir[x + 1] - recevoir[x]) == 1)
+      {
+        message[i] = recevoir[x];
+        i++;
+      }
+    if (i>8) {
+      break;
+    }
+  }
+  // In giá trị message
+  for(i = 0; i < 8; i++) {
+    printf("message = %d\n", message[i]);
+  }
+
+  for (x = 0; x < nsample; x++) {
+    modulated[x] = 1333 * Vpp * sin(2 * PI * x * Fc / Fs) * message[x/60];
+  }
+  
+  for (x = 0; x < nsample; x++) {
+    ptsig3[x] = modulated[x];
+  }
+
   /* Play Tone */
-  for (i = 0; i < 1000; i++)
+  for (i = 0; i < 100; i++)
   {
     for (j = 0; j < 1000; j++)
     {
-      for (sample = 0; sample < nsample; sample++)
+      for (x = 0; x < nsample; x++)
       {
         while ((XmitR & I2S0_IR) == 0)
           ;                               // Wait for transmit interrupt to be pending
-        I2S0_W0_MSW_W = (ptsig3[sample]); // 16 bit left channel transmit audio data
-        I2S0_W1_MSW_W = (ptsig3[sample]); // 16 bit right channel transmit audio data
+        I2S0_W0_MSW_W = (modulated[x]); // 16 bit left channel transmit audio data
+        I2S0_W1_MSW_W = 0;              // 16 bit right channel transmit audio data
                                           //printf("k is %d \n", I2S0_W0_MSW_W);
       }
     }

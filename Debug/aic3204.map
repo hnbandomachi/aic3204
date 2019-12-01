@@ -1,10 +1,10 @@
 ******************************************************************************
               TMS320C55x Linker PC v4.3.6                      
 ******************************************************************************
->> Linked Fri Nov 29 10:53:59 2019
+>> Linked Sun Dec 01 11:40:25 2019
 
 OUTPUT FILE NAME:   <aic3204.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 00025062
+ENTRY POINT SYMBOL: "_c_int00"  address: 00024e64
 
 
 MEMORY CONFIGURATION
@@ -14,10 +14,10 @@ MEMORY CONFIGURATION
 ----------------------  --------  ---------  --------  --------  ----  --------
 PAGE 0:
   MMR                   00000000   000000c0  00000000  000000c0  RWIX
-  DARAM0                000000c0   0000ff40  00005a1e  0000a522  RWIX
+  DARAM0                000000c0   0000ff40  000059a6  0000a59a  RWIX
   SARAM0                00010000   00010000  00000000  00010000  RWIX
-  SARAM1                00020000   00020000  00005192  0001ae6e  RWIX
-  SARAM2                00040000   0000fe00  0000035c  0000faa4  RWIX
+  SARAM1                00020000   00020000  00004f94  0001b06c  RWIX
+  SARAM2                00040000   0000fe00  00000346  0000faba  RWIX
   VECS                  0004fe00   00000200  00000100  00000100  RWIX
   PDROM                 00ff8000   00008000  00000000  00008000  R IX
 
@@ -45,120 +45,115 @@ section   page  orgn(bytes) orgn(words) len(bytes) len(words)   input sections
 .sysmem      0   [ 000030c0 ]  00001860          *   00001000   UNINITIALIZED
                  [ 000030c0 ]  00001860          *   00001000   --HOLE--
 
-.const.1     0   [ 000050c0 ]  00002860          *   00000101   
-                 [ 000050c0 ]  00002860          *   00000101   rts55x_eh.lib : ctype.obj (.const:__ctypes_)
+.bss         0   [ 000050c0 ]  00002860          *   00000272   UNINITIALIZED
+                 [ 000050c0 ]  00002860          *   00000119   rts55x_eh.lib : defs.obj (.bss)
+                 [ 000052f2 ]  00002979          *   000000d0                 : trgdrv.obj (.bss)
+                 [ 00005492 ]  00002a49          *   00000001                 : fopen.obj (.bss)
+                 [ 00005494 ]  00002a4a          *   00000071                 : lowlev.obj (.bss)
+                 [ 00005576 ]  00002abb          *   00000001   usbstk5515bsl.lib : usbstk5515_i2c.obj (.bss)
+                 [ 00005578 ]  00002abc          *   00000008   rts55x_eh.lib : sin.obj (.bss)
+                 [ 00005588 ]  00002ac4          *   00000006                 : memory.obj (.bss)
+                 [ 00005594 ]  00002aca          *   00000004                 : _lock.obj (.bss)
+                 [ 0000559c ]  00002ace          *   00000004                 : exit.obj (.bss)
 
-.const.2     0   [ 000052c4 ]  00002962          *   0000007b   
-                 [ 000052c4 ]  00002962          *   0000007b   main.obj (.const:.string)
+.const.1     0   [ 000055a4 ]  00002ad2          *   00000101   
+                 [ 000055a4 ]  00002ad2          *   00000101   rts55x_eh.lib : ctype.obj (.const:__ctypes_)
 
-.const.3     0   [ 000053bc ]  000029de          *   0000008d   
-                 [ 000053bc ]  000029de          *   0000005d   aic3204_test.obj (.const:.string)
-                 [ 00005476 ]  00002a3b          *   00000030   aic3204_tone_headphone.obj (.const:_$P$T0$1)
+.const.2     0   [ 000057a8 ]  00002bd4          *   0000007b   
+                 [ 000057a8 ]  00002bd4          *   0000007b   main.obj (.const:.string)
 
-.const.4     0   [ 000054d8 ]  00002a6c          *   0000008c   
-                 [ 000054d8 ]  00002a6c          *   00000024   rts55x_eh.lib : _printfi.obj (.const:.string)
-                 [ 00005520 ]  00002a90          *   00000016                 : cos.obj (.const)
-                 [ 0000554c ]  00002aa6          *   00000014                 : sin.obj (.const)
-                 [ 00005574 ]  00002aba          *   0000000c                 : _printfi.obj (.const)
-                 [ 0000558c ]  00002ac6          *   0000000a   aic3204_tone_headphone.obj (.const)
-                 [ 000055a0 ]  00002ad0          *   00000008   aic3204_tone_headphone.obj (.const:_$P$T1$2)
-                 [ 000055b0 ]  00002ad8          *   00000008   rts55x_eh.lib : divd.obj (.const:_initial_approx$1)
-                 [ 000055c0 ]  00002ae0          *   00000008                 : round.obj (.const)
-                 [ 000055d0 ]  00002ae8          *   00000006                 : modf.obj (.const)
-                 [ 000055dc ]  00002aee          *   00000004                 : trunc.obj (.const)
-                 [ 000055e4 ]  00002af2          *   00000002                 : fputs.obj (.const:.string)
-                 [ 000055e8 ]  00002af4          *   00000002                 : divd.obj (.const)
-                 [ 000055ec ]  00002af6          *   00000002                 : fltlid.obj (.const)
+.const.3     0   [ 000058a0 ]  00002c50          *   0000005d   
+                 [ 000058a0 ]  00002c50          *   0000005d   aic3204_test.obj (.const:.string)
 
-.bss         0   [ 000055f0 ]  00002af8          *   0000027a   UNINITIALIZED
-                 [ 000055f0 ]  00002af8          *   00000119   rts55x_eh.lib : defs.obj (.bss)
-                 [ 00005822 ]  00002c11          *   000000d0                 : trgdrv.obj (.bss)
-                 [ 000059c2 ]  00002ce1          *   00000001                 : fopen.obj (.bss)
-                 [ 000059c4 ]  00002ce2          *   00000071                 : lowlev.obj (.bss)
-                 [ 00005aa6 ]  00002d53          *   00000001   usbstk5515bsl.lib : usbstk5515_i2c.obj (.bss)
-                 [ 00005aa8 ]  00002d54          *   00000008   rts55x_eh.lib : cos.obj (.bss)
-                 [ 00005ab8 ]  00002d5c          *   00000008                 : sin.obj (.bss)
-                 [ 00005ac8 ]  00002d64          *   00000006                 : memory.obj (.bss)
-                 [ 00005ad4 ]  00002d6a          *   00000004                 : _lock.obj (.bss)
-                 [ 00005adc ]  00002d6e          *   00000004                 : exit.obj (.bss)
+.const.4     0   [ 0000595c ]  00002cae          *   00000088   
+                 [ 0000595c ]  00002cae          *   00000024   rts55x_eh.lib : _printfi.obj (.const:.string)
+                 [ 000059a4 ]  00002cd2          *   0000001e   aic3204_tone_headphone.obj (.const:.string)
+                 [ 000059e0 ]  00002cf0          *   00000014   rts55x_eh.lib : sin.obj (.const)
+                 [ 00005a08 ]  00002d04          *   0000000c                 : _printfi.obj (.const)
+                 [ 00005a20 ]  00002d10          *   00000008                 : divd.obj (.const:_initial_approx$1)
+                 [ 00005a30 ]  00002d18          *   00000008                 : round.obj (.const)
+                 [ 00005a40 ]  00002d20          *   00000006   aic3204_tone_headphone.obj (.const)
+                 [ 00005a4c ]  00002d26          *   00000006   rts55x_eh.lib : modf.obj (.const)
+                 [ 00005a58 ]  00002d2c          *   00000004                 : trunc.obj (.const)
+                 [ 00005a60 ]  00002d30          *   00000002                 : fputs.obj (.const:.string)
+                 [ 00005a64 ]  00002d32          *   00000002                 : divd.obj (.const)
+                 [ 00005a68 ]  00002d34          *   00000002                 : fltlid.obj (.const)
 
-.text        0     00020000  [ 00010000 ] 00005192          *   
+.text        0     00020000  [ 00010000 ] 00004f94          *   
                    00020000  [ 00010000 ] 00001598          *   rts55x_eh.lib : _printfi.obj (.text)
-                   00021598  [ 00010acc ] 0000059d          *   aic3204_tone_headphone.obj (.text)
-                   00021b35  [ 00010d9a+] 00000543          *   rts55x_eh.lib : lowlev.obj (.text)
-                   00022078  [ 0001103c ] 00000528          *                 : trgdrv.obj (.text)
-                   000225a0  [ 000112d0 ] 000004b5          *                 : memory.obj (.text)
-                   00022a55  [ 0001152a+] 0000036c          *                 : divd.obj (.text)
-                   00022dc1  [ 000116e0+] 0000027f          *                 : fopen.obj (.text)
-                   00023040  [ 00011820 ] 0000025e          *                 : llmpy.obj (.text)
-                   0002329e  [ 0001194f ] 00000259          *                 : addd.obj (.text)
-                   000234f7  [ 00011a7b+] 00000218          *                 : cos.obj (.text)
-                   0002370f  [ 00011b87+] 000001f2          *                 : sin.obj (.text)
-                   00023901  [ 00011c80+] 000001ea          *                 : cmpd.obj (.text)
-                   00023aeb  [ 00011d75+] 000001d4          *   aic3204_loop_stereo_in1.obj (.text)
-                   00023cbf  [ 00011e5f+] 00000163          *   rts55x_eh.lib : fputs.obj (.text)
-                   00023e22  [ 00011f11 ] 00000156          *   usbstk5515bsl.lib : usbstk5515_gpio.obj (.text)
-                   00023f78  [ 00011fbc ] 0000014c          *   rts55x_eh.lib : mpyd.obj (.text)
-                   000240c4  [ 00012062 ] 0000013e          *   usbstk5515bsl.lib : usbstk5515_i2c.obj (.text)
-                   00024202  [ 00012101 ] 000000e6          *   rts55x_eh.lib : setvbuf.obj (.text)
-                   000242e8  [ 00012174 ] 000000dd          *                 : _io_perm.obj (.text)
-                   000243c5  [ 000121e2+] 000000c8          *                 : frcmpyd_div.obj (.text)
-                   0002448d  [ 00012246+] 000000c2          *                 : fflush.obj (.text)
-                   0002454f  [ 000122a7+] 000000bf          *                 : modf.obj (.text)
-                   0002460e  [ 00012307 ] 000000ba          *                 : trgmsg.obj (.text:CIO_breakpoint)
-                   000246c8  [ 00012364 ] 000000b5          *   aic3204_test.obj (.text)
-                   0002477d  [ 000123be+] 000000a6          *   rts55x_eh.lib : fputc.obj (.text)
-                   00024823  [ 00012411+] 000000a1          *                 : divul.obj (.text)
-                   000248c4  [ 00012462 ] 0000008c          *   main.obj (.text)
-                   00024950  [ 000124a8 ] 0000007d          *   rts55x_eh.lib : ltoa.obj (.text)
-                   000249cd  [ 000124e6+] 0000007b          *                 : fclose.obj (.text)
-                   00024a48  [ 00012524 ] 00000076          *                 : frcmpyd.obj (.text)
-                   00024abe  [ 0001255f ] 00000072          *                 : remul.obj (.text)
-                   00024b30  [ 00012598 ] 0000006f          *                 : fixdli.obj (.text)
-                   00024b9f  [ 000125cf+] 0000006d          *                 : trgmsg.obj (.text)
-                   00024c0c  [ 00012606 ] 0000006b          *                 : fseek.obj (.text)
-                   00024c77  [ 0001263b+] 00000067          *                 : fltlid.obj (.text)
-                   00024cde  [ 0001266f ] 0000005f          *                 : round.obj (.text)
-                   00024d3d  [ 0001269e+] 0000005c          *                 : atoi.obj (.text)
-                   00024d99  [ 000126cc+] 00000054          *   usbstk5515bsl.lib : usbstk5515.obj (.text)
-                   00024ded  [ 000126f6+] 00000050          *   rts55x_eh.lib : printf.obj (.text)
-                   00024e3d  [ 0001271e+] 0000004d          *                 : autoinit.obj (.text)
-                   00024e8a  [ 00012745 ] 0000004b          *                 : args_main.obj (.text)
-                   00024ed5  [ 0001276a+] 0000004b          *                 : remli.obj (.text)
-                   00024f20  [ 00012790 ] 00000048          *                 : divli.obj (.text)
-                   00024f68  [ 000127b4 ] 00000041          *                 : trunc.obj (.text)
-                   00024fa9  [ 000127d4+] 0000003f          *                 : memcpy.obj (.text)
-                   00024fe8  [ 000127f4 ] 0000003e          *                 : exit.obj (.text)
-                   00025026  [ 00012813 ] 0000003c          *                 : idiv.obj (.text)
-                   00025062  [ 00012831 ] 00000034          *                 : boot.obj (.text)
-                   00025096  [ 0001284b ] 0000002a          *                 : fixdi.obj (.text)
-                   000250c0  [ 00012860 ] 0000002a          *                 : udiv.obj (.text)
-                   000250ea  [ 00012875 ] 00000023          *                 : memccpy.obj (.text)
-                   0002510d  [ 00012886+] 0000001c          *                 : isinf.obj (.text)
-                   00025129  [ 00012894+] 00000014          *                 : subd.obj (.text)
-                   0002513d  [ 0001289e+] 00000013          *                 : lmpy.obj (.text)
-                   00025150  [ 000128a8 ] 00000012          *                 : _lock.obj (.text)
-                   00025162  [ 000128b1 ] 00000010          *                 : negd.obj (.text)
-                   00025172  [ 000128b9 ] 0000000c          *                 : fltid.obj (.text)
-                   0002517e  [ 000128bf ] 0000000a          *                 : remove.obj (.text)
-                   00025188  [ 000128c4 ] 00000007          *                 : exit.obj (.text:CIO_breakpoint)
-                   0002518f  [ 000128c7+] 00000002          *                 : vectors.obj (.text)
-                   00025191  [ 000128c8 ] 00000001          *   --HOLE-- [fill = 20]
+                   00021598  [ 00010acc ] 00000543          *                 : lowlev.obj (.text)
+                   00021adb  [ 00010d6d+] 00000528          *                 : trgdrv.obj (.text)
+                   00022003  [ 00011001+] 000004c3          *   aic3204_tone_headphone.obj (.text)
+                   000224c6  [ 00011263 ] 000004b5          *   rts55x_eh.lib : memory.obj (.text)
+                   0002297b  [ 000114bd+] 0000036c          *                 : divd.obj (.text)
+                   00022ce7  [ 00011673+] 000002c8          *   aic3204_loop_stereo_in1.obj (.text)
+                   00022faf  [ 000117d7+] 0000027f          *   rts55x_eh.lib : fopen.obj (.text)
+                   0002322e  [ 00011917 ] 0000025e          *                 : llmpy.obj (.text)
+                   0002348c  [ 00011a46 ] 00000259          *                 : addd.obj (.text)
+                   000236e5  [ 00011b72+] 000001f2          *                 : sin.obj (.text)
+                   000238d7  [ 00011c6b+] 000001ea          *                 : cmpd.obj (.text)
+                   00023ac1  [ 00011d60+] 00000163          *                 : fputs.obj (.text)
+                   00023c24  [ 00011e12 ] 00000156          *   usbstk5515bsl.lib : usbstk5515_gpio.obj (.text)
+                   00023d7a  [ 00011ebd ] 0000014c          *   rts55x_eh.lib : mpyd.obj (.text)
+                   00023ec6  [ 00011f63 ] 0000013e          *   usbstk5515bsl.lib : usbstk5515_i2c.obj (.text)
+                   00024004  [ 00012002 ] 000000e6          *   rts55x_eh.lib : setvbuf.obj (.text)
+                   000240ea  [ 00012075 ] 000000dd          *                 : _io_perm.obj (.text)
+                   000241c7  [ 000120e3+] 000000c8          *                 : frcmpyd_div.obj (.text)
+                   0002428f  [ 00012147+] 000000c2          *                 : fflush.obj (.text)
+                   00024351  [ 000121a8+] 000000bf          *                 : modf.obj (.text)
+                   00024410  [ 00012208 ] 000000ba          *                 : trgmsg.obj (.text:CIO_breakpoint)
+                   000244ca  [ 00012265 ] 000000b5          *   aic3204_test.obj (.text)
+                   0002457f  [ 000122bf+] 000000a6          *   rts55x_eh.lib : fputc.obj (.text)
+                   00024625  [ 00012312+] 000000a1          *                 : divul.obj (.text)
+                   000246c6  [ 00012363 ] 0000008c          *   main.obj (.text)
+                   00024752  [ 000123a9 ] 0000007d          *   rts55x_eh.lib : ltoa.obj (.text)
+                   000247cf  [ 000123e7+] 0000007b          *                 : fclose.obj (.text)
+                   0002484a  [ 00012425 ] 00000076          *                 : frcmpyd.obj (.text)
+                   000248c0  [ 00012460 ] 00000072          *                 : remul.obj (.text)
+                   00024932  [ 00012499 ] 0000006f          *                 : fixdli.obj (.text)
+                   000249a1  [ 000124d0+] 0000006d          *                 : trgmsg.obj (.text)
+                   00024a0e  [ 00012507 ] 0000006b          *                 : fseek.obj (.text)
+                   00024a79  [ 0001253c+] 00000067          *                 : fltlid.obj (.text)
+                   00024ae0  [ 00012570 ] 0000005f          *                 : round.obj (.text)
+                   00024b3f  [ 0001259f+] 0000005c          *                 : atoi.obj (.text)
+                   00024b9b  [ 000125cd+] 00000054          *   usbstk5515bsl.lib : usbstk5515.obj (.text)
+                   00024bef  [ 000125f7+] 00000050          *   rts55x_eh.lib : printf.obj (.text)
+                   00024c3f  [ 0001261f+] 0000004d          *                 : autoinit.obj (.text)
+                   00024c8c  [ 00012646 ] 0000004b          *                 : args_main.obj (.text)
+                   00024cd7  [ 0001266b+] 0000004b          *                 : remli.obj (.text)
+                   00024d22  [ 00012691 ] 00000048          *                 : divli.obj (.text)
+                   00024d6a  [ 000126b5 ] 00000041          *                 : trunc.obj (.text)
+                   00024dab  [ 000126d5+] 0000003f          *                 : memcpy.obj (.text)
+                   00024dea  [ 000126f5 ] 0000003e          *                 : exit.obj (.text)
+                   00024e28  [ 00012714 ] 0000003c          *                 : idiv.obj (.text)
+                   00024e64  [ 00012732 ] 00000034          *                 : boot.obj (.text)
+                   00024e98  [ 0001274c ] 0000002a          *                 : fixdi.obj (.text)
+                   00024ec2  [ 00012761 ] 0000002a          *                 : udiv.obj (.text)
+                   00024eec  [ 00012776 ] 00000023          *                 : memccpy.obj (.text)
+                   00024f0f  [ 00012787+] 0000001c          *                 : isinf.obj (.text)
+                   00024f2b  [ 00012795+] 00000014          *                 : subd.obj (.text)
+                   00024f3f  [ 0001279f+] 00000013          *                 : lmpy.obj (.text)
+                   00024f52  [ 000127a9 ] 00000012          *                 : _lock.obj (.text)
+                   00024f64  [ 000127b2 ] 00000010          *                 : negd.obj (.text)
+                   00024f74  [ 000127ba ] 0000000c          *                 : fltid.obj (.text)
+                   00024f80  [ 000127c0 ] 0000000a          *                 : remove.obj (.text)
+                   00024f8a  [ 000127c5 ] 00000007          *                 : exit.obj (.text:CIO_breakpoint)
+                   00024f91  [ 000127c8+] 00000002          *                 : vectors.obj (.text)
+                   00024f93  [ 000127c9 ] 00000001          *   --HOLE-- [fill = 20]
 
 .cio         0   [ 00040000 ]  00020000          *   00000120   UNINITIALIZED
                  [ 00040000 ]  00020000          *   00000120   rts55x_eh.lib : trgmsg.obj (.cio)
 
-.cinit       0   [ 00040240 ]  00020120          *   0000008e   
+.cinit       0   [ 00040240 ]  00020120          *   00000083   
                  [ 00040240 ]  00020120          *   0000002d   rts55x_eh.lib : lowlev.obj (.cinit)
                  [ 0004029a ]  0002014d          *   0000002a                 : defs.obj (.cinit)
-                 [ 000402ee ]  00020177          *   0000000b                 : cos.obj (.cinit)
-                 [ 00040304 ]  00020182          *   0000000b                 : sin.obj (.cinit)
-                 [ 0004031a ]  0002018d          *   0000000a                 : _lock.obj (.cinit)
-                 [ 0004032e ]  00020197          *   0000000a                 : exit.obj (.cinit)
-                 [ 00040342 ]  000201a1          *   00000004                 : fopen.obj (.cinit)
-                 [ 0004034a ]  000201a5          *   00000004                 : memory.obj (.cinit)
-                 [ 00040352 ]  000201a9          *   00000004   usbstk5515bsl.lib : usbstk5515_i2c.obj (.cinit)
-                 [ 0004035a ]  000201ad          *   00000001   --HOLE-- [fill = 0]
+                 [ 000402ee ]  00020177          *   0000000b                 : sin.obj (.cinit)
+                 [ 00040304 ]  00020182          *   0000000a                 : _lock.obj (.cinit)
+                 [ 00040318 ]  0002018c          *   0000000a                 : exit.obj (.cinit)
+                 [ 0004032c ]  00020196          *   00000004                 : fopen.obj (.cinit)
+                 [ 00040334 ]  0002019a          *   00000004                 : memory.obj (.cinit)
+                 [ 0004033c ]  0002019e          *   00000004   usbstk5515bsl.lib : usbstk5515_i2c.obj (.cinit)
+                 [ 00040344 ]  000201a2          *   00000001   --HOLE-- [fill = 0]
 
 vectors      0     0004fe00  [ 00027f00 ] 00000100          *   
                    0004fe00  [ 00027f00 ] 00000100          *   rts55x_eh.lib : vectors.obj (vectors)
@@ -175,38 +170,38 @@ byte addr   word addr   name
 ffffffff                .bss
 ffffffff                .data
 ffffffff                .text
-00025189                C$$EXIT
-000246c3                C$$IO$$
-00025026                I$$DIV
-0002513d                I$$LMPY
-00025045                I$$MOD
-000250c0                I$$UDIV
-000250d5                I$$UMOD
-000246c8                _AIC3204_rget
-00024713                _AIC3204_rset
-00022542                _HOSTclock
-000224d7                _HOSTclose
-00022422                _HOSTlseek
-00022383                _HOSTopen
-000222f6                _HOSTread
-00022248                _HOSTrename
-000221ea                _HOSTtime
-00022180                _HOSTunlink
-000220f3                _HOSTwrite
+00024f8b                C$$EXIT
+000244c5                C$$IO$$
+00024e28                I$$DIV
+00024f3f                I$$LMPY
+00024e47                I$$MOD
+00024ec2                I$$UDIV
+00024ed7                I$$UMOD
+000244ca                _AIC3204_rget
+00024515                _AIC3204_rset
+00021fa5                _HOSTclock
+00021f3a                _HOSTclose
+00021e85                _HOSTlseek
+00021de6                _HOSTopen
+00021d59                _HOSTread
+00021cab                _HOSTrename
+00021c4d                _HOSTtime
+00021be3                _HOSTunlink
+00021b56                _HOSTwrite
 0004fe00                _Reset
-000248c4                _TEST_execute
-00023f20                _USBSTK5515_GPIO_getInput
-00023e22                _USBSTK5515_GPIO_init
-00023e26                _USBSTK5515_GPIO_setDirection
-00023ea3                _USBSTK5515_GPIO_setOutput
-000240e3                _USBSTK5515_I2C_close
-000240c4                _USBSTK5515_I2C_init
-00024189                _USBSTK5515_I2C_read
-000240ec                _USBSTK5515_I2C_reset
-000240fa                _USBSTK5515_I2C_write
-00024ddf                _USBSTK5515_init
-00024d99                _USBSTK5515_wait
-00024dcd                _USBSTK5515_waitusec
+000246c6                _TEST_execute
+00023d22                _USBSTK5515_GPIO_getInput
+00023c24                _USBSTK5515_GPIO_init
+00023c28                _USBSTK5515_GPIO_setDirection
+00023ca5                _USBSTK5515_GPIO_setOutput
+00023ee5                _USBSTK5515_I2C_close
+00023ec6                _USBSTK5515_I2C_init
+00023f8b                _USBSTK5515_I2C_read
+00023eee                _USBSTK5515_I2C_reset
+00023efc                _USBSTK5515_I2C_write
+00024be1                _USBSTK5515_init
+00024b9b                _USBSTK5515_wait
+00024bcf                _USBSTK5515_waitusec
             00020000    __CIOBUF_
             00001060    __STACK_END
 00002000                __STACK_SIZE
@@ -220,113 +215,112 @@ ffffffff                ___data__
 ffffffff                ___edata__
 ffffffff                ___end__
 ffffffff                ___etext__
-0002510d                ___isinf
+00024f0f                ___isinf
 ffffffff                ___pinit__
 ffffffff                ___text__
-0002329e                __addd
-00024e8a                __args_main
-00022ee2                __cleanup
-            00002d6e    __cleanup_ptr
-00023a93                __cmpd
-            00002860    __ctypes_
-00022a77                __divd
-00025026                __divi
-00024f20                __divli
-00023269                __divlli
-000250c0                __divu
-00024823                __divul
-00023175                __divull
-0002448d                __doflush
-            00002d70    __dtors_ptr
-00023a5f                __eqld
-00025096                __fixdi
-00024b30                __fixdli
-00025172                __fltid
-00024c77                __fltlid
-00024a48                __frcmpyd
-000243c5                __frcmpyd_div
-            00002c10    __ft_end
-            00002af8    __ftable
-00023a15                __geqd
-000239ca                __gtrd
-0002397d                __leqd
-            00002d6a    __lock
-00023935                __lssd
-00023f78                __mpyd
-0002513d                __mpyli
-000230bd                __mpylli
-00025162                __negd
-00023901                __neqd
-00025160                __nop
-00024cde                __nround
+0002348c                __addd
+00024c8c                __args_main
+000230d0                __cleanup
+            00002ace    __cleanup_ptr
+00023a69                __cmpd
+            00002ad2    __ctypes_
+0002299d                __divd
+00024e28                __divi
+00024d22                __divli
+00023457                __divlli
+00024ec2                __divu
+00024625                __divul
+00023363                __divull
+0002428f                __doflush
+            00002ad0    __dtors_ptr
+00023a35                __eqld
+00024e98                __fixdi
+00024932                __fixdli
+00024f74                __fltid
+00024a79                __fltlid
+0002484a                __frcmpyd
+000241c7                __frcmpyd_div
+            00002978    __ft_end
+            00002860    __ftable
+000239eb                __geqd
+000239a0                __gtrd
+00023953                __leqd
+            00002aca    __lock
+0002390b                __lssd
+00023d7a                __mpyd
+00024f3f                __mpyli
+000232ab                __mpylli
+00024f64                __negd
+000238d7                __neqd
+00024f62                __nop
+00024ae0                __nround
 00021356                __printfi
-00024368                __rd_ok
-00025158                __register_lock
-00025150                __register_unlock
-00025045                __remi
-00024ed5                __remli
-0002308e                __remlli
-000250d5                __remu
-00024abe                __remul
-00023040                __remull
+0002416a                __rd_ok
+00024f5a                __register_lock
+00024f52                __register_unlock
+00024e47                __remi
+00024cd7                __remli
+0002327c                __remlli
+00024ed7                __remu
+000248c0                __remul
+0002322e                __remull
             00000060    __stack
-00025129                __subd
+00024f2b                __subd
             00001860    __sys_memory
             00001060    __sysstack
-            00002b70    __tmpnams
-00024f68                __trunc
-            00002d6c    __unlock
-000242e8                __wrt_ok
-00025188                _abort
-00021f88                _add_device
-00023aeb                _aic3204_loop_stereo_in1
-00024735                _aic3204_test
-00021598                _aic3204_tone_headphone
-00024d3d                _atoi
-00024e3d                _auto_init
-00025062                _c_int00
-00022a2f                _calloc
-00022a27                _chkheap
-00021f15                _close
-000234f7                _cos
-00024fe8                _exit
-000249cd                _fclose
-000244f6                _fflush
-00021f0c                _find_registered_device
-00023005                _fopen
-0002477d                _fputc
-00023cbf                _fputs
-000225a0                _free
-000229d1                _free_memory
-00022f3c                _freopen
-00024c0c                _fseek
-00022078                _getenv
-            00002d53    _i2c_timeout
-00021ea6                _lseek
-00024950                _ltoa
-00024915                _main
-000226d1                _malloc
-00022977                _max_free
-000250ea                _memccpy
-00024fa9                _memcpy
-0002266c                _minit
-0002454f                _modf
-00021de7                _open
-00024ded                _printf
-0002477d                _putc
-00024814                _putchar
-00023df4                _puts
-00021d39                _read
-00024b9f                _readmsg
-000227c6                _realloc
-0002517e                _remove
-00021d03                _remove_device
-00021caa                _rename
-00024202                _setvbuf
-0002370f                _sin
-00021c77                _unlink
-00021b35                _write
-0002460e                _writemsg
+            000028d8    __tmpnams
+00024d6a                __trunc
+            00002acc    __unlock
+000240ea                __wrt_ok
+00024f8a                _abort
+000219eb                _add_device
+00022ce7                _aic3204_loop_stereo_in1
+00024537                _aic3204_test
+00022003                _aic3204_tone_headphone
+00024b3f                _atoi
+00024c3f                _auto_init
+00024e64                _c_int00
+00022955                _calloc
+0002294d                _chkheap
+00021978                _close
+00024dea                _exit
+000247cf                _fclose
+000242f8                _fflush
+0002196f                _find_registered_device
+000231f3                _fopen
+0002457f                _fputc
+00023ac1                _fputs
+000224c6                _free
+000228f7                _free_memory
+0002312a                _freopen
+00024a0e                _fseek
+00021adb                _getenv
+            00002abb    _i2c_timeout
+00021909                _lseek
+00024752                _ltoa
+00024717                _main
+000225f7                _malloc
+0002289d                _max_free
+00024eec                _memccpy
+00024dab                _memcpy
+00022592                _minit
+00024351                _modf
+0002184a                _open
+00024bef                _printf
+0002457f                _putc
+00024616                _putchar
+00023bf6                _puts
+0002179c                _read
+000249a1                _readmsg
+000226ec                _realloc
+00024f80                _remove
+00021766                _remove_device
+0002170d                _rename
+00024004                _setvbuf
+000236e5                _sin
+000216da                _unlink
+00021598                _write
+00024410                _writemsg
 ffffffff                binit
             00020120    cinit
 ffffffff                edata
@@ -350,139 +344,138 @@ byte addr   word addr   name
             00001060    __STACK_END
             00001060    __sysstack
             00001860    __sys_memory
-            00002860    __ctypes_
-            00002af8    __ftable
-            00002b70    __tmpnams
-            00002c10    __ft_end
-            00002d53    _i2c_timeout
-            00002d6a    __lock
-            00002d6c    __unlock
-            00002d6e    __cleanup_ptr
-            00002d70    __dtors_ptr
+            00002860    __ftable
+            000028d8    __tmpnams
+            00002978    __ft_end
+            00002abb    _i2c_timeout
+            00002aca    __lock
+            00002acc    __unlock
+            00002ace    __cleanup_ptr
+            00002ad0    __dtors_ptr
+            00002ad2    __ctypes_
 00021356                __printfi
-00021598                _aic3204_tone_headphone
-00021b35                _write
-00021c77                _unlink
-00021caa                _rename
-00021d03                _remove_device
-00021d39                _read
-00021de7                _open
-00021ea6                _lseek
-00021f0c                _find_registered_device
-00021f15                _close
-00021f88                _add_device
-00022078                _getenv
-000220f3                _HOSTwrite
-00022180                _HOSTunlink
-000221ea                _HOSTtime
-00022248                _HOSTrename
-000222f6                _HOSTread
-00022383                _HOSTopen
-00022422                _HOSTlseek
-000224d7                _HOSTclose
-00022542                _HOSTclock
-000225a0                _free
-0002266c                _minit
-000226d1                _malloc
-000227c6                _realloc
-00022977                _max_free
-000229d1                _free_memory
-00022a27                _chkheap
-00022a2f                _calloc
-00022a77                __divd
-00022ee2                __cleanup
-00022f3c                _freopen
-00023005                _fopen
-00023040                __remull
-0002308e                __remlli
-000230bd                __mpylli
-00023175                __divull
-00023269                __divlli
-0002329e                __addd
-000234f7                _cos
-0002370f                _sin
-00023901                __neqd
-00023935                __lssd
-0002397d                __leqd
-000239ca                __gtrd
-00023a15                __geqd
-00023a5f                __eqld
-00023a93                __cmpd
-00023aeb                _aic3204_loop_stereo_in1
-00023cbf                _fputs
-00023df4                _puts
-00023e22                _USBSTK5515_GPIO_init
-00023e26                _USBSTK5515_GPIO_setDirection
-00023ea3                _USBSTK5515_GPIO_setOutput
-00023f20                _USBSTK5515_GPIO_getInput
-00023f78                __mpyd
-000240c4                _USBSTK5515_I2C_init
-000240e3                _USBSTK5515_I2C_close
-000240ec                _USBSTK5515_I2C_reset
-000240fa                _USBSTK5515_I2C_write
-00024189                _USBSTK5515_I2C_read
-00024202                _setvbuf
-000242e8                __wrt_ok
-00024368                __rd_ok
-000243c5                __frcmpyd_div
-0002448d                __doflush
-000244f6                _fflush
-0002454f                _modf
-0002460e                _writemsg
-000246c3                C$$IO$$
-000246c8                _AIC3204_rget
-00024713                _AIC3204_rset
-00024735                _aic3204_test
-0002477d                _fputc
-0002477d                _putc
-00024814                _putchar
-00024823                __divul
-000248c4                _TEST_execute
-00024915                _main
-00024950                _ltoa
-000249cd                _fclose
-00024a48                __frcmpyd
-00024abe                __remul
-00024b30                __fixdli
-00024b9f                _readmsg
-00024c0c                _fseek
-00024c77                __fltlid
-00024cde                __nround
-00024d3d                _atoi
-00024d99                _USBSTK5515_wait
-00024dcd                _USBSTK5515_waitusec
-00024ddf                _USBSTK5515_init
-00024ded                _printf
-00024e3d                _auto_init
-00024e8a                __args_main
-00024ed5                __remli
-00024f20                __divli
-00024f68                __trunc
-00024fa9                _memcpy
-00024fe8                _exit
-00025026                I$$DIV
-00025026                __divi
-00025045                I$$MOD
-00025045                __remi
-00025062                _c_int00
-00025096                __fixdi
-000250c0                I$$UDIV
-000250c0                __divu
-000250d5                I$$UMOD
-000250d5                __remu
-000250ea                _memccpy
-0002510d                ___isinf
-00025129                __subd
-0002513d                I$$LMPY
-0002513d                __mpyli
-00025150                __register_unlock
-00025158                __register_lock
-00025160                __nop
-00025162                __negd
-00025172                __fltid
-0002517e                _remove
-00025188                _abort
-00025189                C$$EXIT
+00021598                _write
+000216da                _unlink
+0002170d                _rename
+00021766                _remove_device
+0002179c                _read
+0002184a                _open
+00021909                _lseek
+0002196f                _find_registered_device
+00021978                _close
+000219eb                _add_device
+00021adb                _getenv
+00021b56                _HOSTwrite
+00021be3                _HOSTunlink
+00021c4d                _HOSTtime
+00021cab                _HOSTrename
+00021d59                _HOSTread
+00021de6                _HOSTopen
+00021e85                _HOSTlseek
+00021f3a                _HOSTclose
+00021fa5                _HOSTclock
+00022003                _aic3204_tone_headphone
+000224c6                _free
+00022592                _minit
+000225f7                _malloc
+000226ec                _realloc
+0002289d                _max_free
+000228f7                _free_memory
+0002294d                _chkheap
+00022955                _calloc
+0002299d                __divd
+00022ce7                _aic3204_loop_stereo_in1
+000230d0                __cleanup
+0002312a                _freopen
+000231f3                _fopen
+0002322e                __remull
+0002327c                __remlli
+000232ab                __mpylli
+00023363                __divull
+00023457                __divlli
+0002348c                __addd
+000236e5                _sin
+000238d7                __neqd
+0002390b                __lssd
+00023953                __leqd
+000239a0                __gtrd
+000239eb                __geqd
+00023a35                __eqld
+00023a69                __cmpd
+00023ac1                _fputs
+00023bf6                _puts
+00023c24                _USBSTK5515_GPIO_init
+00023c28                _USBSTK5515_GPIO_setDirection
+00023ca5                _USBSTK5515_GPIO_setOutput
+00023d22                _USBSTK5515_GPIO_getInput
+00023d7a                __mpyd
+00023ec6                _USBSTK5515_I2C_init
+00023ee5                _USBSTK5515_I2C_close
+00023eee                _USBSTK5515_I2C_reset
+00023efc                _USBSTK5515_I2C_write
+00023f8b                _USBSTK5515_I2C_read
+00024004                _setvbuf
+000240ea                __wrt_ok
+0002416a                __rd_ok
+000241c7                __frcmpyd_div
+0002428f                __doflush
+000242f8                _fflush
+00024351                _modf
+00024410                _writemsg
+000244c5                C$$IO$$
+000244ca                _AIC3204_rget
+00024515                _AIC3204_rset
+00024537                _aic3204_test
+0002457f                _fputc
+0002457f                _putc
+00024616                _putchar
+00024625                __divul
+000246c6                _TEST_execute
+00024717                _main
+00024752                _ltoa
+000247cf                _fclose
+0002484a                __frcmpyd
+000248c0                __remul
+00024932                __fixdli
+000249a1                _readmsg
+00024a0e                _fseek
+00024a79                __fltlid
+00024ae0                __nround
+00024b3f                _atoi
+00024b9b                _USBSTK5515_wait
+00024bcf                _USBSTK5515_waitusec
+00024be1                _USBSTK5515_init
+00024bef                _printf
+00024c3f                _auto_init
+00024c8c                __args_main
+00024cd7                __remli
+00024d22                __divli
+00024d6a                __trunc
+00024dab                _memcpy
+00024dea                _exit
+00024e28                I$$DIV
+00024e28                __divi
+00024e47                I$$MOD
+00024e47                __remi
+00024e64                _c_int00
+00024e98                __fixdi
+00024ec2                I$$UDIV
+00024ec2                __divu
+00024ed7                I$$UMOD
+00024ed7                __remu
+00024eec                _memccpy
+00024f0f                ___isinf
+00024f2b                __subd
+00024f3f                I$$LMPY
+00024f3f                __mpyli
+00024f52                __register_unlock
+00024f5a                __register_lock
+00024f62                __nop
+00024f64                __negd
+00024f74                __fltid
+00024f80                _remove
+00024f8a                _abort
+00024f8b                C$$EXIT
             00020000    __CIOBUF_
             00020120    ___cinit__
             00020120    cinit
@@ -505,4 +498,4 @@ ffffffff                end
 ffffffff                etext
 ffffffff                pinit
 
-[164 symbols]
+[163 symbols]

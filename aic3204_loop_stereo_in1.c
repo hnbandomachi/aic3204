@@ -24,6 +24,7 @@ Int16 aic3204_loop_stereo_in1( )
     /* Pre-generated sine wave data, 16-bit signed samples */
     Int16 j, i = 0;
     Int16 sample, data1, data2, data3, data4;
+    Int16 recevoir[480];
    
     /* Configure AIC3204 */
 
@@ -86,27 +87,38 @@ Int16 aic3204_loop_stereo_in1( )
     I2S0_ICMR = 0x3f;    // Enable interrupts
     
     /* Play Tone */
-    // for ( i = 0 ; i < 15 ; i++ )
-    // {
-    //     for ( j = 0 ; j < 1000 ; j++ )
-    //     {
-    //         for ( sample = 0 ; sample < 48 ; sample++ )
-    //         {
-    //             /* Read Digital audio */
-    //             while((Rcv & I2S0_IR) == 0);  // Wait for interrupt pending flag
-    //             data3 = I2S0_W0_MSW_R;  // 16 bit left channel received audio data
-    //             data1 = I2S0_W0_LSW_R;
-    //             data4 = I2S0_W1_MSW_R;  // 16 bit right channel received audio data
-    //             data2 = I2S0_W1_LSW_R;
-    //             // printf("data3 = %ld\t data4 = %ld\n",data3, data4);
-    //             /* Write Digital audio */
-    //             while((Xmit & I2S0_IR) == 0);  // Wait for interrupt pending flag
-    //             I2S0_W0_MSW_W = data3;  // 16 bit left channel transmit audio data
-    //             I2S0_W0_LSW_W = 0;
-    //             I2S0_W1_MSW_W = data3;  // 16 bit right channel transmit audio data
-    //             I2S0_W1_LSW_W = 0;
-    //         }
-    //     }
+    for ( i = 0 ; i < 100 ; i++ )
+    {
+        for ( j = 0 ; j < 1000 ; j++ )
+        {
+            for ( sample = 0 ; sample < 480; sample++ )
+            {
+                /* Read Digital audio */
+                while((Rcv & I2S0_IR) == 0);  // Wait for interrupt pending flag
+                data3 = I2S0_W0_MSW_R;  // 16 bit left channel received audio data
+                data1 = I2S0_W0_LSW_R;
+                data4 = I2S0_W1_MSW_R;  // 16 bit right channel received audio data                
+                data2 = I2S0_W1_LSW_R;
+
+                if(data3 > 2000 && data3 < 4000) {
+                    data3 = 3000;
+                }
+                else if(data3 < -2000 && data3 > -4000) {
+                    data3 = 0;
+                } 
+                recevoir[sample] = data3;
+                // printf("data3 = %ld\t data4 = %ld\n",data3, data4);
+                /* Write Digital audio */
+                while((Xmit & I2S0_IR) == 0);  // Wait for interrupt pending flag
+                I2S0_W0_MSW_W = data3;  // 16 bit left channel transmit audio data
+                I2S0_W0_LSW_W = 0;
+                I2S0_W1_MSW_W = data4;  // 16 bit right channel transmit audio data
+                I2S0_W1_LSW_W = 0;
+            }
+        }
+    }
+    // for(i = 0; i < 480; i++) {
+    //     printf("%d\n", recevoir[i]);
     // }
     /* Disble I2S */
     I2S0_CR = 0x00;

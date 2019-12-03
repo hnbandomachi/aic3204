@@ -25,9 +25,10 @@ extern Int16 AIC3204_rset(Uint16 regnum, Uint16 regval);
  *                                                                          *
  * ------------------------------------------------------------------------ */
 Int16 aic3204_tone_headphone()
-{  
+{
   short ptsig3[480];
   Int16 message[8];
+  Int16 binary[16];
   short modulated[480];
 
   int x, Vpp = 2;
@@ -36,7 +37,7 @@ Int16 aic3204_tone_headphone()
   Int16 j, i = 0;
   Int16 recevoir[480];
 
-    /* Pre-generated sine wave data, 16-bit signed samples */
+  /* Pre-generated sine wave data, 16-bit signed samples */
 
   /* Configure AIC3204 */
   AIC3204_rset(0, 0); // Select page 0
@@ -97,52 +98,77 @@ Int16 aic3204_tone_headphone()
   I2S0_CR = 0x8010; // 16-bit word, slave, enable I2C
   I2S0_ICMR = 0x3f; // Enable interrupts
 
-  // Lấy 480 mẫu giá trị của xung vuông
-  for (x = 0; x < 480; x++)
-  {
-    while((Rcv & I2S0_IR) == 0);  // Wait for interrupt pending flag
-    data3 = I2S0_W0_MSW_R; // 16 bit left channel received audio data
-    if (data3 > 0)
-    {
-      data3 = 1;
-    }
-    else if (data3 < 0)
-    {
-      data3 = 0;
-    }
-    recevoir[x] = data3;
-  }
+
+  // Lấy 480 giá trị mẫu của xung vuông
+  // for (i = 0; i < 1; i++)
+  // {
+  //   for (j = 0; j < 10; j++)
+  //   {
+  //     for (x = 0; x < 480; x++)
+  //     {
+  //       /* Read Digital audio */
+  //       while ((Rcv & I2S0_IR) == 0);                    // Wait for interrupt pending flag
+  //       data3 = I2S0_W0_MSW_R; // 16 bit left channel received audio data
+
+  //       if (data3 > 0)
+  //       {
+  //         data3 = 1;
+  //       }
+  //       else
+  //       {
+  //         data3 = 0;
+  //       }
+  //       recevoir[x] = data3;
+  //     }
+  //   }
+  // }
+
   // In ra 480 giá trị mẫu của xung vuông vừa nhận được ở trên
-  for (x = 0; x < 480; x++) {
-    printf("recevoir = %d\n", recevoir[x]);
-  }
+  // for (x = 0; x < 480; x++)
+  // {
+  //   printf("%d\n", recevoir[x]);
+  // }
 
   // Đưa 480 giá trị mẫu vào message có kích thước là 8
   i = 0;
-  for (x = 0; x < 480; x++)
-  {
-    if (abs(recevoir[x + 1] - recevoir[x]) == 1)
-      {
-        message[i] = recevoir[x];
-        i++;
-      }
-    if (i>8) {
-      break;
-    }
-  }
-  // In giá trị message
-  for(i = 0; i < 8; i++) {
-    printf("message = %d\n", message[i]);
+  // for (x = 0; x < 480; x++)
+  // {
+  //   if (abs(recevoir[x + 1] - recevoir[x]) == 1)
+  //   {
+  //     message[i] = recevoir[x];
+  //     i++;
+  //   }
+  //   if (i > 8)
+  //   {
+  //     break;
+  //   }
+  // }
+
+  // Nhập chuỗi 0 - 1 kích thước 16
+  printf("\nInput your binary-message\n");
+  for (i = 0; i < 16; i++) {
+    printf("INPUT: "); scanf("%d", &binary[i]);
   }
 
-  for (x = 0; x < nsample; x++) {
-    modulated[x] = 1333 * Vpp * sin(2 * PI * x * Fc / Fs) * message[x/60];
+  // Xử lí giá trị message
+  for (i = 0; i < 8; i++)
+  {
+    message[i] = binary[2*i]*2 + binary[2*i + 1];
+    printf("message = %d\n", message[i]);
+  }  
+
+  // OK với message 8 phần tử.
+  for (x = 0; x < nsample; x++)
+  {
+    modulated[x] = 1333 * Vpp * sin(2 * PI * x * Fc / Fs) * message[x / 60];
   }
-  
-  for (x = 0; x < nsample; x++) {
+
+  for (x = 0; x < nsample; x++)
+  {
     ptsig3[x] = modulated[x];
   }
 
+  printf("Play tone\n");
   /* Play Tone */
   for (i = 0; i < 100; i++)
   {
@@ -150,11 +176,10 @@ Int16 aic3204_tone_headphone()
     {
       for (x = 0; x < nsample; x++)
       {
-        while ((XmitR & I2S0_IR) == 0)
-          ;                               // Wait for transmit interrupt to be pending
+        while ((XmitR & I2S0_IR) == 0);                             // Wait for transmit interrupt to be pending
         I2S0_W0_MSW_W = (modulated[x]); // 16 bit left channel transmit audio data
         I2S0_W1_MSW_W = 0;              // 16 bit right channel transmit audio data
-                                          //printf("k is %d \n", I2S0_W0_MSW_W);
+                                        //printf("k is %d \n", I2S0_W0_MSW_W);
       }
     }
   }

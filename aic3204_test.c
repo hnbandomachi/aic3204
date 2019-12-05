@@ -67,14 +67,9 @@ Int16 aic3204_test( )
 	USBSTK5515_I2C_init( );        // Initialize I2C
    
     /* Codec tests */
-    printf( " -> 1 KHz Tone on Headphone (J4).\n" );
     if ( aic3204_tone_headphone( ) )
         return 1;
        
     USBSTK5515_wait( 100 );  // Wait    
-    printf( "<-> Audio Loopback from Stereo IN 1 (J3) --> to HP (J4)\n" );
-    if ( aic3204_loop_stereo_in1( ) )
-        return 1;
-
     return 0;
 }

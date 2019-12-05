@@ -15,8 +15,6 @@ void TEST_execute( Int16 ( *funchandle )( ), char *testname, Int16 testid )
 {
     Int16 status;
 
-    /* Display test ID */
-    printf( "%02d  Testing %s...\n", testid, testname );
 
     /* Call test function */
     status = funchandle( );
@@ -48,11 +46,12 @@ void main( void )
 {
     /* Initialize BSL */
     USBSTK5515_init( );
-
-    printf("EXBUSSEL = %02x\n", SYS_EXBUSSEL);
-    
+    printf("Course: \tAnalog and Digital Modulation\n");
+    printf("Instructor: \tProf. Dr. Thuong Le-Tien\n");
+    printf("Topic: \t\tModulating 4-ASK\n");
+    printf("Group 1: \tLe Quang Huy \t1611260 \t30 \n");
+    printf("\t\tLe Trung Luom \t1611952 \t31 \n");
+    printf("\t\tHuynh The Hao \t1610875 \t32 \n");
     TEST_execute( aic3204_test, "AIC3204", 1 );
-
-    printf( "\n***ALL Tests Passed***\n" );
     SW_BREAKPOINT;
 }

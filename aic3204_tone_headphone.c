@@ -125,7 +125,6 @@ Int16 aic3204_tone_headphone()
     ptsig3[x] = modulated[x];
   }
 
-  printf("Play tone\n");
   /* Play Tone */
   for (i = 0; i < 100; i++)
   {

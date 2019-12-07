@@ -26,7 +26,6 @@ extern Int16 AIC3204_rset(Uint16 regnum, Uint16 regval);
  * ------------------------------------------------------------------------ */
 Int16 aic3204_tone_headphone()
 {
-  short ptsig3[480];
   Int16 message[8];
   Int16 binary[16];
   short modulated[480];
@@ -96,7 +95,6 @@ Int16 aic3204_tone_headphone()
   I2S0_SRGR = 0x0;
   I2S0_CR = 0x8010; // 16-bit word, slave, enable I2C
   I2S0_ICMR = 0x3f; // Enable interrupts
-  
 
   // Nhập chuỗi 0 - 1 kích thước 16
   printf("\nInput your binary-message\n");
@@ -120,13 +118,10 @@ Int16 aic3204_tone_headphone()
     modulated[x] = 1333 * Vpp * sin(2* PI * x * Fc / Fs) * message[x / 120];
   }
 
-  for (x = 0; x < nsample; x++)
-  {
-    ptsig3[x] = modulated[x];
-  }
-
+  
+  
   /* Play Tone */
-  for (i = 0; i < 100; i++)
+  for (i = 0; i < 1; i++)
   {
     for (j = 0; j < 1000; j++)
     {
@@ -135,10 +130,14 @@ Int16 aic3204_tone_headphone()
         while ((XmitR & I2S0_IR) == 0); // Wait for transmit interrupt to be pending
         I2S0_W0_MSW_W = (modulated[x]); // 16 bit left channel transmit audio data
         I2S0_W1_MSW_W = 0;              // 16 bit right channel transmit audio data
-                                        //printf("k is %d \n", I2S0_W0_MSW_W);
       }
     }
+  }  
+  
+  for (x = 0; x < nsample; x++) {
+    printf("%d\n", modulated[x]);
   }
+
   /* Disble I2S */
   I2S0_CR = 0x00;
 

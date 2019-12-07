@@ -113,7 +113,7 @@ all: aic3204.out
 aic3204.out: $(GEN_CMDS) $(CMD_SRCS) $(OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Linker'
-	"D:/Code Composer Studio/ccsv4/tools/compiler/c5500/bin/cl55" -vcpu:3.3 -g --diag_warning=225 --ptrdiff_size=32 --memory_model=large -z -m"aic3204.map" --warn_sections -i"D:/Code Composer Studio/ccsv4/tools/compiler/c5500/lib" -i"D:/Code Composer Studio/ccsv4/tools/compiler/c5500/include" -i"D:/Code Composer Studio/ccsv4/emulation/boards/usbstk5515_v1/tests/aic3204/../../lib" --reread_libs --rom_model -o "aic3204.out" $(ORDERED_OBJS)
+	"D:/CCSv4/ccsv4/tools/compiler/c5500/bin/cl55" -vcpu:3.3 -g --diag_warning=225 --ptrdiff_size=32 --memory_model=large -z -m"aic3204.map" --warn_sections -i"D:/CCSv4/ccsv4/tools/compiler/c5500/lib" -i"D:/CCSv4/ccsv4/tools/compiler/c5500/include" -i"D:/CCSv4/ccsv4/emulation/boards/usbstk5515_v1/tests/aic3204/../../lib" --reread_libs --rom_model -o "aic3204.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

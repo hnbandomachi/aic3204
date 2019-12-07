@@ -47,28 +47,28 @@ C_SRCS_QUOTED += \
 aic3204_loop_stereo_in1.obj: ../aic3204_loop_stereo_in1.c $(GEN_OPTS)
 	@echo 'Building file: $<'
 	@echo 'Invoking: Compiler'
-	"D:/Code Composer Studio/ccsv4/tools/compiler/c5500/bin/cl55" -vcpu:3.3 -g --include_path="D:/Code Composer Studio/ccsv4/tools/compiler/c5500/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --memory_model=large --preproc_with_compile --preproc_dependency="aic3204_loop_stereo_in1.pp" $(GEN_OPTS_QUOTED) $(subst #,$(wildcard $(subst $(SPACE),\$(SPACE),$<)),"#")
+	"D:/CCSv4/ccsv4/tools/compiler/c5500/bin/cl55" -vcpu:3.3 -g --include_path="D:/CCSv4/ccsv4/tools/compiler/c5500/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --memory_model=large --preproc_with_compile --preproc_dependency="aic3204_loop_stereo_in1.pp" $(GEN_OPTS_QUOTED) $(subst #,$(wildcard $(subst $(SPACE),\$(SPACE),$<)),"#")
 	@echo 'Finished building: $<'
 	@echo ' '
 
 aic3204_test.obj: ../aic3204_test.c $(GEN_OPTS)
 	@echo 'Building file: $<'
 	@echo 'Invoking: Compiler'
-	"D:/Code Composer Studio/ccsv4/tools/compiler/c5500/bin/cl55" -vcpu:3.3 -g --include_path="D:/Code Composer Studio/ccsv4/tools/compiler/c5500/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --memory_model=large --preproc_with_compile --preproc_dependency="aic3204_test.pp" $(GEN_OPTS_QUOTED) $(subst #,$(wildcard $(subst $(SPACE),\$(SPACE),$<)),"#")
+	"D:/CCSv4/ccsv4/tools/compiler/c5500/bin/cl55" -vcpu:3.3 -g --include_path="D:/CCSv4/ccsv4/tools/compiler/c5500/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --memory_model=large --preproc_with_compile --preproc_dependency="aic3204_test.pp" $(GEN_OPTS_QUOTED) $(subst #,$(wildcard $(subst $(SPACE),\$(SPACE),$<)),"#")
 	@echo 'Finished building: $<'
 	@echo ' '
 
 aic3204_tone_headphone.obj: ../aic3204_tone_headphone.c $(GEN_OPTS)
 	@echo 'Building file: $<'
 	@echo 'Invoking: Compiler'
-	"D:/Code Composer Studio/ccsv4/tools/compiler/c5500/bin/cl55" -vcpu:3.3 -g --include_path="D:/Code Composer Studio/ccsv4/tools/compiler/c5500/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --memory_model=large --preproc_with_compile --preproc_dependency="aic3204_tone_headphone.pp" $(GEN_OPTS_QUOTED) $(subst #,$(wildcard $(subst $(SPACE),\$(SPACE),$<)),"#")
+	"D:/CCSv4/ccsv4/tools/compiler/c5500/bin/cl55" -vcpu:3.3 -g --include_path="D:/CCSv4/ccsv4/tools/compiler/c5500/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --memory_model=large --preproc_with_compile --preproc_dependency="aic3204_tone_headphone.pp" $(GEN_OPTS_QUOTED) $(subst #,$(wildcard $(subst $(SPACE),\$(SPACE),$<)),"#")
 	@echo 'Finished building: $<'
 	@echo ' '
 
 main.obj: ../main.c $(GEN_OPTS)
 	@echo 'Building file: $<'
 	@echo 'Invoking: Compiler'
-	"D:/Code Composer Studio/ccsv4/tools/compiler/c5500/bin/cl55" -vcpu:3.3 -g --include_path="D:/Code Composer Studio/ccsv4/tools/compiler/c5500/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --memory_model=large --preproc_with_compile --preproc_dependency="main.pp" $(GEN_OPTS_QUOTED) $(subst #,$(wildcard $(subst $(SPACE),\$(SPACE),$<)),"#")
+	"D:/CCSv4/ccsv4/tools/compiler/c5500/bin/cl55" -vcpu:3.3 -g --include_path="D:/CCSv4/ccsv4/tools/compiler/c5500/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --memory_model=large --preproc_with_compile --preproc_dependency="main.pp" $(GEN_OPTS_QUOTED) $(subst #,$(wildcard $(subst $(SPACE),\$(SPACE),$<)),"#")
 	@echo 'Finished building: $<'
 	@echo ' '
 
